@@ -1,0 +1,10 @@
+1. What does await do? Why do we need it?
+await is used inside an async function to pause the code until a promise is finished (resolved or rejected). We need it so that JavaScript waits for the API response before continuing, instead of running the next lines immediately without data.
+
+
+2. What happens if the API is down? How does our code handle that?
+If the API is down or there is a network problem, the fetch request will fail. Our code handles this using try...catch. When the error happens, it goes to the catch block and shows an error message instead of crashing the program.
+
+3. What's the difference between try and catch?
+try is where we place the code that might cause an error (like fetching data).
+catch is where we handle the error if something goes wrong inside try. It prevents the program from stopping and lets us show a proper message instead.
