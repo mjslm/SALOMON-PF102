@@ -317,7 +317,9 @@ searchInput.addEventListener("input", (e) => {
 ## Reflection (Write in your notebook)
 
 1. What does `await` do? Why do we need it?
+We need await because JavaScript waits for either resolve (success) or reject (error).
 2. What happens if the API is down? How does our code handle that?
+If API is download
 3. What's the difference between `try` and `catch`?
 
 ---

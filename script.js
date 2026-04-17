@@ -1,4 +1,5 @@
 const loadBtn = document.getElementById("loadBtn");
+const refreshBtn = document.getElementById("refreshBtn");
 const loadingDiv = document.getElementById("loading");
 const errorDiv = document.getElementById("error");
 const usersContainer = document.getElementById("usersContainer");
@@ -6,14 +7,14 @@ const searchInput = document.getElementById("searchInput");
 
 let users = [];
 
-// Fetch users from API
+// Fetch API
 async function fetchUsers() {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const data = await response.json();
     return data;
 }
 
-// Create user card
+// Create card
 function createUserCard(user) {
     const card = document.createElement("div");
     card.className = "user-card";
@@ -31,19 +32,18 @@ function createUserCard(user) {
 // Render users
 function renderUsers(list) {
     usersContainer.innerHTML = "";
-
     list.forEach(user => {
         usersContainer.appendChild(createUserCard(user));
     });
 }
 
-// Load button click
-loadBtn.addEventListener("click", async () => {
+// Common loader function (for both buttons)
+async function loadData(button, loadingText) {
     errorDiv.classList.add("hidden");
 
     loadingDiv.classList.remove("hidden");
-    loadBtn.disabled = true;
-    loadBtn.textContent = "Loading...";
+    button.disabled = true;
+    button.textContent = loadingText;
 
     try {
         users = await fetchUsers();
@@ -55,12 +55,23 @@ loadBtn.addEventListener("click", async () => {
 
     } finally {
         loadingDiv.classList.add("hidden");
-        loadBtn.disabled = false;
-        loadBtn.textContent = "Load Users";
+        button.disabled = false;
+        button.textContent =
+            button.id === "loadBtn" ? "Load Users" : "Refresh Users";
     }
+}
+
+// Load button
+loadBtn.addEventListener("click", () => {
+    loadData(loadBtn, "Loading...");
 });
 
-// Search feature
+// Refresh button
+refreshBtn.addEventListener("click", () => {
+    loadData(refreshBtn, "Refreshing...");
+});
+
+// Search
 searchInput.addEventListener("input", (e) => {
     const term = e.target.value.toLowerCase();
 

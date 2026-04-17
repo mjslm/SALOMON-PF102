@@ -3,7 +3,7 @@ await is used inside an async function to pause the code until a promise is fini
 
 
 2. What happens if the API is down? How does our code handle that?
-If the API is down or there is a network problem, the fetch request will fail. Our code handles this using try...catch. When the error happens, it goes to the catch block and shows an error message instead of crashing the program.
+If the API is down or there is a network problem, the fetch request will fail. Our code handles this using try  catch. When the error happens, it goes to the catch block and shows an error message instead of crashing the program.
 
 3. What's the difference between try and catch?
 try is where we place the code that might cause an error (like fetching data).
